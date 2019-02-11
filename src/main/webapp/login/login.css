@@ -1,0 +1,29 @@
+@charset "utf-8";
+/*包裹主页面*/
+.content{width: 100%;height: 100%;background-image: url("../back.jpg");background-repeat: no-repeat;background-size: cover;position: relative;}
+
+/***登录框***/
+.login{width: 400px;background-color: #FFFFFF;padding: 10px;position: absolute;box-shadow: 0px 0px 15px #868484;top: 200px;right: 160px;}
+.login .warpper{margin: 0 auto;width: 350px;padding: 15px;}
+.login .warpper title{color: #242424;}
+.login .warpper div{margin: 15px;font-weight: bold;}
+.login p{padding-top: 4px;}
+.login input{border: 1px solid #F1F0F5;background-color: #F1F0F5;width: 100%;height: 32px;border-radius: 10px;outline: none;text-indent: 20px;}
+.login input:hover{border: 1px solid #5C97EB;}
+.login button{width: 100%;height: 32px;border: none;border-radius: 10px;color: white;outline: none;background: linear-gradient(to right,skyblue,#234EEB)}
+.login button:hover{cursor: pointer;}
+.login .option{overflow: hidden;}
+.login .option div{font-size: 14px;font-weight:normal;color: #5C97EB;margin: 3px;}
+.login .option .forget:hover{color: red;cursor: pointer;}
+.login .option input{width: 15px;height: 15px;vertical-align:middle;color: blue;margin-left: 10px;}
+
+/***忘记密码***/
+.forgetPass{width: 400px;background-color: #FFFFFF;padding: 10px;position: absolute;box-shadow: 0px 0px 15px #868484;top: 200px;right: 160px;}
+.forgetPass .warpper{margin: 0 auto;width: 350px;padding: 15px;}
+.forgetPass .warpper title{color: #242424;}
+.forgetPass .warpper div{margin: 15px;font-weight: bold;}
+.forgetPass input{border: 1px solid #F1F0F5;background-color: #F1F0F5;width: 100%;height: 32px;border-radius: 10px;outline: none;text-indent: 20px;}
+.forgetPass .verify > input{width: 50%;}
+.forgetPass .verify > button{width: 30%;margin-right: 10px;}
+.forgetPass button{width: 100%;height: 32px;border: none;border-radius: 10px;color: white;outline: none;background: linear-gradient(to right,skyblue,#234EEB)}
+.forgetPass button:hover{cursor: pointer;}

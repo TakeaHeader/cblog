@@ -1,0 +1,24 @@
+@charset "utf-8";
+
+*{margin: 0;padding: 0;text-decoration: none;list-style: none;font-size: 14px;font-family: 'Microsoft YaHei';}
+html,body{width: 100%;height: 100%;}
+
+.font_12{font-size: 12px;}
+.font_14{font-size: 14px;}
+.font_16{font-size: 16px;}
+.font_18{font-size: 18px;}
+.font_20{font-size: 20px;}
+.font_24{font-size: 24px;}
+.font_26{font-size: 26px;}
+.font_32{font-size: 32px;}
+
+.skyblue{color: skyblue;}
+.blue{color: blue;}
+.red{color:red;}
+
+.fl{float: left;}
+.fr{float: right;}
+.show{display: block;}
+.hide{display: none;}
+
+.underline{text-decoration: underline;}

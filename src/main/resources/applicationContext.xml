@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:jee="http://www.springframework.org/schema/jee"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-4.3.xsd
+           http://www.springframework.org/schema/mvc
+           http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+           http://www.springframework.org/schema/tx
+           http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-4.3.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd">
+
+    <!--自动扫描bean-->
+    <context:component-scan base-package="site.btsearch" annotation-config="true" />
+
+    <mvc:annotation-driven />
+
+    <bean id="placeholderConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:config.properties"></property>
+    </bean>
+
+    <mvc:interceptors>
+        <bean class="site.btsearch.core.BaseInterceptor"></bean>
+    </mvc:interceptors>
+    <!--&lt;!&ndash;JSON视图&ndash;&gt;-->
+    <bean id="JSON" class="site.btsearch.core.view.JsonView"></bean>
+    <!--&lt;!&ndash;html 解析器&ndash;&gt;-->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="contentType" value="text/html"></property>
+        <property name="prefix" value="/"></property>
+        <property name="suffix" value=".html"></property>
+        <property name="order" value="2"></property>
+    </bean>
+
+    <bean id="jsonViewResolver" class="site.btsearch.core.view.JsonViewResolver">
+        <!--<property name="view" ref="JSON"></property>-->
+        <property name="order" value="1"></property>
+    </bean>
+
+    <mvc:resources mapping="/**" location="/"></mvc:resources>
+    
+    <!-- &lt;!&ndash;&lt;!&ndash;静态资源映射&ndash;&gt;&ndash;&gt;
+     <mvc:resources mapping="/user.html" location="/user.html"></mvc:resources>
+     <mvc:resources mapping="/user.css" location="/user.css"></mvc:resources>
+     <mvc:resources mapping="/login.html" location="/login.html"></mvc:resources>
+     <mvc:resources mapping="/404.html" location="/404.html"></mvc:resources>
+     <mvc:resources mapping="/login.css" location="/login.css"></mvc:resources>
+     <mvc:resources mapping="/login.js" location="/login.js"></mvc:resources>
+     <mvc:resources mapping="/admin/**" location="/admin/"></mvc:resources>
+     <mvc:resources mapping="/config/**" location="/config/"></mvc:resources>
+     <mvc:resources mapping="/css/**" location="/css/"></mvc:resources>
+     <mvc:resources mapping="/lib/**" location="/lib/"></mvc:resources>
+     <mvc:resources mapping="/script/**" location="/script/"></mvc:resources>
+    -->
+
+    <!--数据源   JNDI 和 JDBC 两种方式获取数据源-->
+    <!--<bean id="ds_blog" class="org.springframework.jndi.JndiObjectFactoryBean" scope="singleton">
+        <property name="jndiName">
+            <value>java:comp/env/jdbc/blog</value>
+        </property>
+    </bean>-->
+
+
+   <bean id="ds_blog" class="org.springframework.jdbc.datasource.DriverManagerDataSource" scope="singleton">
+        <property name="url" value="${JDBC.url}"></property>
+        <property name="driverClassName" value="${JDBC.driver}"></property>
+        <property name="username" value="${JDBC.username}"></property>
+        <property name="password" value="${JDBC.password}"></property>
+    </bean>
+
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="ds_blog"></property>
+    </bean>
+
+
+    <!--为了可以直接兼容spring 数据接入 和 mybatis 数据接入 公用一个数据源-->
+    <bean id="factory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="ds_blog"></property>
+        <property name="configLocation" value="classpath:select_config.xml"></property>
+        <property name="mapperLocations" >
+            <array>
+                <value>classpath:site/btsearch/core/mapper/*mapper.xml</value>
+                <value>classpath:site/btsearch/mapper/*mapper.xml</value>
+            </array>
+        </property>
+    </bean>
+   <!-- <bean id="staticResourceHandler" class="site.btsearch.DefaultStaticResourceHandler"></bean>-->
+
+    <!--<bean id="simpleUrlHandlerMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <prop key="/*">staticResourceHandler</prop>
+            </props>
+        </property>
+    </bean>-->
+
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="factory"></property>
+        <property name="basePackage" value="site.btsearch"></property>
+    </bean>
+
+    <bean id="sessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg ref="factory"></constructor-arg>
+    </bean>
+
+    <!--上下文获取-->
+    <bean id="holer" class="site.btsearch.core.helper.SpringApplicationContextHoler"></bean>
+
+</beans>

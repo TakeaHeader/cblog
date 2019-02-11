@@ -1,0 +1,3 @@
+site\btsearch\service\UserService.class
+site\btsearch\mapper\UserMapper.class
+site\btsearch\service\IndexService.class

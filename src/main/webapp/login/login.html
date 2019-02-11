@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>login</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="../pub/pub.css">
+	<link rel="stylesheet" type="text/css" href="login.css">
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="login.js"></script>
+</head>
+<body>
+	<div class="content">
+		<div class="login show">
+			<div class="warpper">
+				<div class="title">
+					<p class="font_24">晚上好,</p>
+					<p class="font_16">欢迎使用CMS系统</p>
+				</div>
+				<div class="user">
+					<input type="text" name="user" placeholder="请输入账号/邮箱" maxlength="10" />
+				</div>
+				<div class="pass">
+					<input type="password" name="password" placeholder="请输入密码" maxlength="20" />
+				</div>
+				<div class="option">
+					<div class="fl">记住我:<input type="checkbox" name="remember"></div>
+					<div class="fr underline forget">忘记密码?</div>
+				</div>
+				<div class="submit">
+					<button>登录</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="forgetPass hide">
+			<div class="warpper">
+				<div class="title">
+					<p class="font_24">晚上好,</p>
+					<p class="font_16">欢迎使用CMS新闻系统</p>
+				</div>
+				<div class="email">
+					<input type="text" name="email" placeholder="请输入邮箱" />
+				</div>
+				<div class="verify">
+					<input type="text" name="verifyCode" placeholder="请输入校验码" /><button class="fr">发送验证码</button>
+				</div>
+				<div class="newpass">
+					<input type="text" name="newpassword" placeholder="请输入新密码"  /> 
+				</div>
+				<div class="newpass">
+					<input type="text" name="renewpassword" placeholder="再次输入新密码" />
+				</div>
+				<div class="submit">
+					<button>提交</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
